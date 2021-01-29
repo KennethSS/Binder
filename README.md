@@ -180,26 +180,22 @@ class FoodListMoreViewModel : ViewModel(), ViewModelPagingList<Food>, PagingList
 ```kotlin
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
+        val recyclerView = findViewById<RecyclerView>(R.id.food_list_view)
+        
         // For list
-        findViewById<RecyclerView>(R.id.food_list_view).let {
-            it.adapter = FoodAdapter(lifecycleOwner, foodListViewModel, foodViewModel)
-        }
+        recyclerView.adapter = FoodAdapter(lifecycleOwner, foodListViewModel, foodViewModel)
 
         // For paging
-        findViewById<RecyclerView>(R.id.food_list_view).let {
-            val recyclerViewController = RecyclerViewController(it, foodListMoreViewModel)
-            val adapter = FoodLoadingAdapter(
-                lifecycleOwner,
-                foodListMoreViewModel,
-                recyclerViewController,
-                foodViewModel
-            )
-            it.adapter = adapter
-        }
-        
+        val recyclerViewController = RecyclerViewController(recyclerView, foodListMoreViewModel)
+
+        recyclerView.adapter = FoodLoadingAdapter(
+            lifecycleOwner,
+            foodListMoreViewModel,
+            recyclerViewController,
+            foodViewModel
+        )
+
+        // Fetch list to ViewModel
         foodListViewModel.fetchFoodList()
     }
 }
