@@ -1,7 +1,7 @@
 <h1 align="center">Binder</h1></br>
 
 <p align="center">
-Binder is a simple RecyclerView with databinding and mvvm pattern for andorid listview
+🗂 Binder is a simple RecyclerView with databinding and mvvm pattern for andorid listview
 </p>
 
 <p align="center">
