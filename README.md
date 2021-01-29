@@ -50,7 +50,7 @@ dependencies {
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:onClick="@{ view -> vm.onClick(item) }">
+        android:onClick="@{view->vm.onClick(item)}">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:src="@{item.img}"/>
