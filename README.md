@@ -70,31 +70,6 @@ data class Food (
 ) : ItemType
 ```
 
-
-
-
-#### Set ViewModel
-```kotlin
-class FoodListViewModel : ViewModel(), ViewModelList<Food> {
-    private val _list = MutableLiveData<Int>()
-    override val list: LiveData<List<Food>>
-
-    init {
-        list = _list.switchMap {
-            liveData(Dispatchers.IO) {
-                val foods = FoodFactory.getFoodList(5)
-                emit(foods)
-            }
-        }
-    }
-
-    @MainThread
-    fun fetchFoodList() {
-        _list.value = 0
-    }
-}
-```
-
 #### Set Adater
 ```kotlin
 class FoodAdapter(
