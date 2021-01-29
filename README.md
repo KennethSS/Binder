@@ -10,7 +10,7 @@ Binder is a simple RecyclerView with databinding and mvvm pattern for andorid li
 
 ### Dependency Gradle 
 Add below codes to your **root** `build.gradle` file (not your module build.gradle file).
-```
+```gradle
 allprojects {
     repositories {
         jcenter()
