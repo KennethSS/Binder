@@ -38,6 +38,7 @@ dependencies {
 
 #### Prapare Item
 ```xml
+item_food.xml
 <layout>
     <data>
         <variable
@@ -66,7 +67,7 @@ data class Food (
     val title: String,
     val subtitle: String,
     val img: Int,
-    override val layoutRes: Int = R.layout.item_food_menu
+    override val layoutRes: Int = R.layout.item_food
 ) : ItemType
 ```
 
