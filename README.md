@@ -36,28 +36,32 @@ dependencies {
 ## Usage
 ### Basic Example
 
-#### Prepare to making item
+#### Prepare to making item item_food.xml
 ```xml
-<layout>    
+<layout>
     <data>
-        <!-- If you wan't to use that you have not to declare -->
+        <variable
+            name="item"
+            type="com.some.package.Food" />
+
         <variable
             name="vm"
-            type="com.solar.recyclerviewsample.viewmodel.FoodViewModel" />
+            type="com.some.package.FoodViewModel" />
     </data>
-  
-    <com.solar.recyclerview.SolarRecyclerView
-        android:id="@+id/list_view"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        bind:loading="@{true}"
-        bind:vm="@{vm}"
-        bind:items="@{vm.foodGridList}"
-        bind:decoration="@{6}"
-        tools:listitem="@layout/item_food_grid">
-    </com.solar.recyclerview.SolarRecyclerView>
+        android:layout_height="wrap_conetnt"
+        android:onClick="@{ view -> vm.onClick(item) }">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:src="@{item.img}"/>
+
+        <TextView
+            android:text="@{item.title}"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
+
 ```
 
 #### Prapare Item
