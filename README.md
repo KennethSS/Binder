@@ -36,7 +36,7 @@ dependencies {
 ## Usage
 ### Basic Example
 
-#### Prepare to making item item_food.xml
+#### Prapare Item
 ```xml
 <layout>
     <data>
@@ -50,8 +50,6 @@ dependencies {
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_conetnt"
         android:onClick="@{ view -> vm.onClick(item) }">
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -61,10 +59,8 @@ dependencies {
             android:text="@{item.title}"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
-
 ```
 
-#### Prapare Item
 ```kotlin
 data class Food (
     val title: String,
@@ -73,6 +69,9 @@ data class Food (
     override val layoutRes: Int = R.layout.item_food_menu
 ) : ItemType
 ```
+
+
+
 
 #### Set ViewModel
 ```kotlin
