@@ -6,6 +6,7 @@ import com.solar.binder.viewmodel.FoodViewModel
 import com.solar.library.binder.RecyclerViewController
 import com.solar.library.binder.adapter.AbstractLoadingAdapter
 import com.solar.library.binder.viewmodel.ViewModelList
+import com.solar.library.binder.viewmodel.ViewModelPagingList
 
 /**
  * Copyright 2020 Kenneth
@@ -25,7 +26,7 @@ import com.solar.library.binder.viewmodel.ViewModelList
  **/
 class FoodLoadingAdapter(
     lifecycleOwner: LifecycleOwner,
-    viewModelList: ViewModelList<Food>,
+    viewModelList: ViewModelPagingList<Food>,
     controller: RecyclerViewController,
     viewModel: FoodViewModel
 ) : AbstractLoadingAdapter<Food>(viewModelList, controller, viewModel) {

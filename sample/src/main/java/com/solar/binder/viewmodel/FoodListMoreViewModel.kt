@@ -1,14 +1,14 @@
 package com.solar.binder.viewmodel
 
 import androidx.annotation.MainThread
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.solar.binder.model.Food
 import com.solar.binder.model.FoodFactory
 import com.solar.library.binder.listener.PagingListener
 import com.solar.library.binder.viewmodel.ViewModelList
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import com.solar.library.binder.viewmodel.ViewModelPagingList
 import java.lang.Thread.sleep
 
 /**
@@ -27,10 +27,11 @@ import java.lang.Thread.sleep
  * limitations under the License.
  *
  **/
-class FoodListMoreViewModel : ViewModel(), ViewModelList<Food>, PagingListener {
-    private val _list = MutableLiveData<ArrayList<Food>>()
-    override val list: LiveData<ArrayList<Food>>
+class FoodListMoreViewModel : ViewModel(), ViewModelPagingList<Food>, PagingListener {
+    private val _list = MutableLiveData<List<Food>>()
+    override val list: LiveData<List<Food>>
         get() = _list
+    override var isPaging: Boolean = true
 
     @MainThread
     fun fetchFoodList() {
@@ -41,10 +42,11 @@ class FoodListMoreViewModel : ViewModel(), ViewModelList<Food>, PagingListener {
         Thread {
             sleep(2000)
             val foods = FoodFactory.getFoodList(5)
-            val array = arrayListOf<Food>()
-            array.addAll((list.value ?: arrayListOf()))
-            array.addAll(foods)
-            _list.postValue(array)
+            _list.postValue((list.value ?: arrayListOf()) + foods)
+
+            if (foods.last().title == "Luttuce combo") {
+                isPaging = false
+            }
         }.start()
     }
 

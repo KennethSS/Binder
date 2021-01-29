@@ -25,15 +25,13 @@ import kotlinx.coroutines.Dispatchers
  **/
 class FoodListViewModel : ViewModel(), ViewModelList<Food> {
     private val _list = MutableLiveData<Int>()
-    override val list: LiveData<ArrayList<Food>>
+    override val list: LiveData<List<Food>>
 
     init {
         list = _list.switchMap {
             liveData(Dispatchers.IO) {
                 val foods = FoodFactory.getFoodList(5)
-                val array = arrayListOf<Food>()
-                array.addAll(foods)
-                emit(array)
+                emit(foods)
             }
         }
     }

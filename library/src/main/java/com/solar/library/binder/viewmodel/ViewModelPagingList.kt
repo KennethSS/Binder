@@ -1,10 +1,7 @@
-package com.solar.binder.adapter
+package com.solar.library.binder.viewmodel
 
-import androidx.lifecycle.LifecycleOwner
-import com.solar.binder.model.Food
-import com.solar.binder.viewmodel.FoodViewModel
-import com.solar.library.binder.adapter.AbstractDataBindingAdapter
-import com.solar.library.binder.viewmodel.ViewModelList
+import androidx.lifecycle.LiveData
+import com.solar.library.binder.holder.ItemType
 
 /**
  * Copyright 2020 Kenneth
@@ -22,15 +19,6 @@ import com.solar.library.binder.viewmodel.ViewModelList
  * limitations under the License.
  *
  **/
-class FoodAdapter(
-    lifecycleOwner: LifecycleOwner,
-    viewModelList: ViewModelList<Food>,
-    viewModel: FoodViewModel
-) : AbstractDataBindingAdapter<Food>(viewModelList, viewModel) {
-
-    init {
-        viewModelList.list.observe(lifecycleOwner, {
-            notifyDataSetChanged()
-        })
-    }
+interface ViewModelPagingList<T: ItemType> : ViewModelList<T> {
+    var isPaging: Boolean
 }

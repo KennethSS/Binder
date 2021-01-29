@@ -7,7 +7,6 @@ import com.solar.library.binder.listener.PagingListener
 class RecyclerViewController(
     rv: RecyclerView,
     paging: PagingListener,
-    var isLoading: Boolean = false,
     var isAttachedThreshold: Boolean = false
 ) {
     init {

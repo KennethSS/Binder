@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.solar.binder.adapter.FoodLoadingAdapter
 import com.solar.binder.viewmodel.FoodListMoreViewModel
-import com.solar.binder.viewmodel.FoodListViewModel
 import com.solar.binder.viewmodel.FoodViewModel
 import com.solar.library.binder.RecyclerViewController
 
@@ -36,7 +35,7 @@ class LoadMoreActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         findViewById<RecyclerView>(R.id.food_list_view).let {
-            val recyclerViewController = RecyclerViewController(it, foodListMoreViewModel, isLoading = true)
+            val recyclerViewController = RecyclerViewController(it, foodListMoreViewModel)
 
             val adapter = FoodLoadingAdapter(
                 this@LoadMoreActivity,
