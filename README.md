@@ -34,11 +34,10 @@ dependencies {
 
 
 ## Usage
-### Basic Example
+
 
 #### Prapare Item
 ```xml
-item_food.xml
 <layout>
     <data>
         <variable
@@ -77,14 +76,7 @@ class FoodAdapter(
     lifecycleOwner: LifecycleOwner,
     viewModelList: ViewModelList<Food>,
     viewModel: FoodViewModel
-) : AbstractDataBindingAdapter<Food>(viewModelList, viewModel) {
-
-    init {
-        viewModelList.list.observe(lifecycleOwner, {
-            notifyDataSetChanged()
-        })
-    }
-}
+) : AbstractDataBindingAdapter<Food>(viewModelList, viewModel)
 ```
 
 #### Set Adater for paging
@@ -94,7 +86,12 @@ class FoodLoadingAdapter(
     viewModelList: ViewModelPagingList<Food>,
     controller: RecyclerViewController,
     viewModel: FoodViewModel
-) : AbstractLoadingAdapter<Food>(viewModelList, controller, viewModel) {
+) : AbstractLoadingAdapter<Food>(viewModelList, controller, viewModel)
+```
+
+### Observe in adapter
+```kotlin
+class FoodLoadingAdapter() {
     init {
         viewModelList.list.observe(lifecycleOwner, {
             notifyDataSetChanged()
@@ -106,21 +103,12 @@ class FoodLoadingAdapter(
 #### Set ViewModel List
 ```kotlin
 class FoodListViewModel : ViewModel(), ViewModelList<Food> {
-    private val _list = MutableLiveData<Int>()
+    private val _list = MutableLiveData<List<Food>>()
     override val list: LiveData<List<Food>>
-
-    init {
-        list = _list.switchMap {
-            liveData(Dispatchers.IO) {
-                val foods = FoodFactory.getFoodList(5)
-                emit(foods)
-            }
-        }
-    }
-
-    @MainThread
+    
     fun fetchFoodList() {
-        _list.value = 0
+        val items...
+        _list.postValue(items) // set items for list
     }
 }
 ```
@@ -133,21 +121,14 @@ class FoodListMoreViewModel : ViewModel(), ViewModelPagingList<Food>, PagingList
         get() = _list
     override var isPaging: Boolean = true
 
-    private fun getFoodList() {
-        Thread {
-            sleep(2000)
-            val foods = FoodFactory.getFoodList(5)
-            val currentList = (list.value ?: arrayListOf())
-            _list.postValue(currentList + foods)
-
-            if (foods.last().title == "Luttuce combo") {
-                isPaging = false // Set end paging
-            }
-        }.start()
-    }
-
     override fun fetchNextPage() {
-        getFoodList()
+        val newFoodList = FoodFactory.getFoodList(5)
+        val currentList = (list.value ?: arrayListOf())
+        _list.postValue(currentList + newFoodList)
+
+        if (foods.last().title == "Luttuce combo" || newFoodList.isEmpty()) {
+          isPaging = false // Set end paging
+        }
     }
 }
 ```
@@ -176,7 +157,3 @@ class MainActivity : AppCompatActivity() {
     }
 }
 ```
-
-<p align="center">
-  <img width="320" src="https://user-images.githubusercontent.com/39362939/95305625-32dd3400-08c1-11eb-88b3-92be623a5aca.gif">
-</p>
