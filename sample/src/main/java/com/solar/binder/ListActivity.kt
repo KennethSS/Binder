@@ -4,12 +4,10 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
-import com.solar.binder.adapter.FoodLoadingAdapter
-import com.solar.binder.viewmodel.FoodListMoreViewModel
+import com.solar.binder.adapter.FoodAdapter
+import com.solar.binder.viewmodel.FoodListViewModel
 import com.solar.binder.viewmodel.FoodViewModel
-import com.solar.library.binder.RecyclerViewController
 
 /**
  * Copyright 2020 Kenneth
@@ -27,28 +25,23 @@ import com.solar.library.binder.RecyclerViewController
  * limitations under the License.
  *
  **/
-class LoadMoreActivity : AppCompatActivity() {
-    private val foodItemViewModel: FoodViewModel by viewModels()
-    private val foodListMoreViewModel: FoodListMoreViewModel by viewModels()
+class ListActivity : AppCompatActivity() {
+    private val foodViewModel: FoodViewModel by viewModels()
+    private val foodListViewModel: FoodListViewModel by viewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recycler_view)
 
-        findViewById<RecyclerView>(R.id.food_list_view).also {
-            RecyclerViewController(it, foodListMoreViewModel)
-        }.let { recyclerView ->
-            val adapter = FoodLoadingAdapter(foodListMoreViewModel, foodItemViewModel)
-            foodListMoreViewModel.list.observe(this, adapter.observer)
-            recyclerView.adapter = adapter
+        findViewById<RecyclerView>(R.id.food_list_view).let {
+            it.adapter = FoodAdapter(this@ListActivity, foodListViewModel, foodViewModel)
         }
 
-        foodListMoreViewModel.fetchFoodList()
-
-        foodItemViewModel.toastEvent.observe(this, {
+        foodViewModel.toastEvent.observe(this, {
             Toast.makeText(this, "Food is $it", Toast.LENGTH_SHORT).show()
         })
 
-        //foodListMoreViewModel.fetchFoodList()
+        foodListViewModel.fetchFoodList()
     }
 }

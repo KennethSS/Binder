@@ -42,12 +42,12 @@ class FoodListMoreViewModel : ViewModel(), ViewModelPagingList<Food>, PagingList
         Thread {
             sleep(2000)
             val foods = FoodFactory.getFoodList(5)
-            val currentList = (list.value ?: arrayListOf())
-            _list.postValue(currentList + foods)
+            //val currentList = (list.value ?: arrayListOf())
+            _list.postValue(foods)
 
-            if (foods.last().title == "Luttuce combo") {
+            /*if (foods.last().title == "Luttuce combo") {
                 isPaging = false
-            }
+            }*/
         }.start()
     }
 

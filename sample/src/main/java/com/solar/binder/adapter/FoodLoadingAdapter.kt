@@ -1,6 +1,8 @@
 package com.solar.binder.adapter
 
+import android.util.Log
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import com.solar.binder.model.Food
 import com.solar.binder.viewmodel.FoodViewModel
 import com.solar.library.binder.RecyclerViewController
@@ -25,14 +27,17 @@ import com.solar.library.binder.viewmodel.ViewModelPagingList
  *
  **/
 class FoodLoadingAdapter(
-    lifecycleOwner: LifecycleOwner,
     viewModelList: ViewModelPagingList<Food>,
-    controller: RecyclerViewController,
     viewModel: FoodViewModel
-) : AbstractLoadingAdapter<Food>(viewModelList, controller, viewModel) {
-    init {
-        viewModelList.list.observe(lifecycleOwner, {
-            notifyDataSetChanged()
-        })
+) : AbstractLoadingAdapter<Food>(viewModelList, viewModel) {
+    val observer: Observer<List<Food>> = Observer {
+        Log.d("FoodLoadingAdapter", "previsous: $previousCount")
+        Log.d("FoodLoadingAdapter", "size: ${it.size}")
+
+        if (previousCount == 1) {
+            notifyItemRangeChanged(0, it.size+1)
+        } else {
+            notifyItemRangeChanged(previousCount, it.size+1)
+        }
     }
 }

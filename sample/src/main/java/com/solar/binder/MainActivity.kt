@@ -4,28 +4,29 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.solar.binder.adapter.FoodAdapter
+import com.solar.binder.databinding.ActivityMainBinding
+import com.solar.binder.extension.startActivity
 import com.solar.binder.viewmodel.FoodListViewModel
 import com.solar.binder.viewmodel.FoodViewModel
 
 class MainActivity : AppCompatActivity() {
-    private val foodViewModel: FoodViewModel by viewModels()
-    private val foodListViewModel: FoodListViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
 
-        findViewById<RecyclerView>(R.id.food_list_view).let {
-            it.adapter = FoodAdapter(this@MainActivity, foodListViewModel, foodViewModel)
+        binding.normal.setOnClickListener {
+            it.startActivity<ListActivity>()
         }
-
-        foodViewModel.toastEvent.observe(this, Observer {
-            Toast.makeText(this, "Food is $it", Toast.LENGTH_SHORT).show()
-        })
-
-        foodListViewModel.fetchFoodList()
+        binding.more.setOnClickListener {
+            it.startActivity<LoadMoreActivity>()
+        }
+        binding.basic.setOnClickListener {
+            it.startActivity<FoodBasicActivity>()
+        }
     }
 }

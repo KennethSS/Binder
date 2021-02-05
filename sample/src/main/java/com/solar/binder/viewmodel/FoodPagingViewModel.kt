@@ -1,13 +1,13 @@
 package com.solar.binder.viewmodel
 
-import androidx.annotation.MainThread
-import androidx.lifecycle.*
-import com.solar.binder.FoodRepository
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.solar.binder.model.Food
 import com.solar.binder.model.FoodFactory
-import com.solar.library.binder.viewmodel.ViewModelList
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 /**
  * Copyright 2020 Kenneth
@@ -25,20 +25,13 @@ import kotlinx.coroutines.flow.flowOn
  * limitations under the License.
  *
  **/
-class FoodListViewModel : ViewModel(), ViewModelList<Food> {
-    private val _list = MutableLiveData<Int>()
-    override val list: LiveData<List<Food>>
+class FoodPagingViewModel : ViewModel() {
 
-    private val repository: FoodRepository by lazy { FoodRepository() }
+    private val _foodLiveData: MutableLiveData<List<Food>> by lazy { MutableLiveData<List<Food>>() }
+    val foodLiveData: LiveData<List<Food>> = _foodLiveData
 
-    init {
-        list = repository.getFoodList()
-            .flowOn(Dispatchers.IO)
-            .asLiveData()
-    }
-
-    @MainThread
-    fun fetchFoodList() {
-        _list.value = 0
+    fun fetchNextPaging() = viewModelScope.launch {
+        delay(2000)
+        _foodLiveData.postValue(FoodFactory.getFoodList(5))
     }
 }
