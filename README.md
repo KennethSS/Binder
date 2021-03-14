@@ -157,3 +157,6 @@ class MainActivity : AppCompatActivity() {
     }
 }
 ```
+
+### Todo
+- Blink issue
