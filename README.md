@@ -28,7 +28,7 @@ buildFeatures {
 
 ```gradle
 dependencies {
-  implementation 'com.github.KennethSS:Binder:1.0.3'
+  implementation 'com.github.KennethSS:Binder:1.0.4'
 }
 ```
 
