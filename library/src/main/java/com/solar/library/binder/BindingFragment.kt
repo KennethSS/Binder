@@ -15,7 +15,7 @@ abstract class BindingFragment<T : ViewDataBinding> constructor(
 
   private var _binding: T? = null
 
-  private val binding: T
+  protected val binding: T
     get() = checkNotNull(_binding) {
       "$this Fragment cannot be accessed before onCreateView() or after onDestroyView()"
     }
