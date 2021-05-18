@@ -1,68 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    
-    <data>
-        <variable
-            name="item"
-            type="String" />
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
 
-        <variable
-            name="position"
-            type="androidx.annotation.IntegerRes" />
+  <data>
 
-        <variable
-            name="vm"
-            type="androidx.lifecycle.ViewModel" />
+    <variable
+      name="item"
+      type="String" />
 
-        <variable
-            name="scrollToPosition"
-            type="Integer" />
-    </data>
+    <variable
+      name="position"
+      type="androidx.annotation.IntegerRes" />
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="148dp">
+    <variable
+      name="vm"
+      type="androidx.lifecycle.ViewModel" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/item_food_img"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="36dp"
-            android:scaleType="centerCrop"
-            android:adjustViewBounds="true"
-            tools:src="@tools:sample/avatars"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+    <variable
+      name="scrollToPosition"
+      type="Integer" />
+  </data>
 
-        <TextView
-            android:id="@+id/item_food_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginBottom="4dp"
-            android:textColor="@android:color/black"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            app:layout_constraintVertical_chainStyle="packed"
-            app:layout_constraintBottom_toTopOf="@id/item_food_subtitle"
-            app:layout_constraintStart_toEndOf="@id/item_food_img"
-            app:layout_constraintTop_toTopOf="@id/item_food_img"
-            tools:text="Luttuce combo" />
+  <FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="148dp">
 
-        <TextView
-            android:id="@+id/item_food_subtitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="14sp"
-            app:layout_constraintTop_toBottomOf="@id/item_food_title"
-            app:layout_constraintBottom_toBottomOf="@id/item_food_img"
-            app:layout_constraintStart_toStartOf="@id/item_food_title"
-            tools:text="Luttuce combo" />
-    </FrameLayout>
+    <TextView
+      android:id="@+id/item_food_title"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="32dp"
+      android:layout_marginBottom="4dp"
+      android:textColor="@android:color/black"
+      android:textSize="18sp"
+      android:textStyle="bold"
+      app:layout_constraintBottom_toTopOf="@id/item_food_subtitle"
+      app:layout_constraintStart_toEndOf="@id/item_food_img"
+      app:layout_constraintTop_toTopOf="@id/item_food_img"
+      app:layout_constraintVertical_chainStyle="packed"
+      tools:text="Luttuce combo" />
+
+    <TextView
+      android:id="@+id/item_food_subtitle"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="4dp"
+      android:textColor="@android:color/darker_gray"
+      android:textSize="14sp"
+      app:layout_constraintBottom_toBottomOf="@id/item_food_img"
+      app:layout_constraintStart_toStartOf="@id/item_food_title"
+      app:layout_constraintTop_toBottomOf="@id/item_food_title"
+      tools:text="Luttuce combo" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+      android:id="@+id/item_food_img"
+      android:layout_width="100dp"
+      android:layout_height="100dp"
+      android:layout_marginStart="36dp"
+      android:adjustViewBounds="true"
+      android:scaleType="centerCrop"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:src="@tools:sample/avatars" />
+  </FrameLayout>
+
 </layout>
