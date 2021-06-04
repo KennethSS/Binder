@@ -28,8 +28,13 @@ import com.solar.library.binder.holder.ItemType
  **/
 abstract class AbstractBasicBindingAdapter<T : ItemType>(
         private val vm: ViewModel? = null,
-        private val isShowProgress: Boolean = true
+        private var isShowProgress: Boolean = true
 ) : AbstractBaseAdapter<T, BindingHolder<T>>() {
+
+    fun isShowProgress(isShowProgress: Boolean) {
+        this.isShowProgress = isShowProgress
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingHolder<T> {
         val layoutInflater = LayoutInflater.from(parent.context)
